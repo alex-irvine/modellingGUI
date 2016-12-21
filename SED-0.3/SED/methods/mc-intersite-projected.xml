@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<SED>
+
+	<!--
+		The initial design that is the best default choice for this method (the two corner points).
+	-->
+	<InitialDesign type="EmptyDesign">
+	</InitialDesign>
+
+	<!--
+		A Monte Carlo method that generates points based on a fair and scaled trade-off between the intersite and projected distance.
+	-->
+	<SampleSelector type="PipelineSampleSelector">
+		
+		<!--
+			The random zoom candidate generator generates a large number of random candidates and generates additional candidates in promising locations.
+		-->
+		<CandidateGenerator type="RandomCandidateGenerator">
+			<!-- Number of random candidates generated. This value is multiplied by the current number of samples to get to the real number of random candidates. -->
+			<Option key="candidatesPerSample" value="500"/>
+		</CandidateGenerator>
+		
+		<!-- The points are ranked based on both the (scaled) intersite and projected distance. -->
+	    <CandidateRanker type="maximinDistance">
+	    	<Option key="scaleToZeroOne" value="true"/>
+	    </CandidateRanker>
+	    <CandidateRanker type="dimensionDistance">
+	    	<Option key="scaleToZeroOne" value="true" />
+	    </CandidateRanker>
+	    
+	    <!-- Both criteria are combined into a global score fairly. -->
+	    <MergeCriterion type="WeightedAverage" weights="[1 1]" />
+	    
+	</SampleSelector>
+</SED>

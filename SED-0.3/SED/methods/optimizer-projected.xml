@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<SED>
+
+	<!--
+		The initial design that is the best default choice for this method (the two corner points).
+	-->
+	<InitialDesign type="CrossCornerDesign">
+	</InitialDesign>
+	
+	<!--
+		A method that first determines the best points in terms of intersite distance, and then locally optimizes these points for the projected distance,
+		this acquiring a good trade-off between both criteria.
+	-->
+	<SampleSelector type="OptimizeCriterion">
+		
+		<!--
+			This candidate generator generates a large number of random candidates, and selects the nCandidates best ones
+			based on the intersite distance.
+		-->
+		<CandidateGenerator type="RandomCandidateGenerator">
+			<!-- Number of random candidates generated. This value is multiplied by the current number of samples to get to the real number of random candidates. -->
+			<Option key="candidatesPerSample" value="500"/>
+			<!-- Number of candidates sorted by the intersite/maximin distance criterion. Remove this option to return all the candidates. -->
+			<Option key="nCandidates" value="30"/>
+			<!-- Number of candidates that can be stored in memory. Can change based on RAM available in system.
+				 If this number is exceeded, the processing is split up in smaller chunks that can fit in memory.
+			-->
+			<Option key="maxMemoryAllowed" value="50000"/>
+		</CandidateGenerator>
+	
+		<!--
+			A local pattern search optimizer. It optimizes only within a (hyper)cube defined by deviation multiplied by the distance of each point
+			from the closest other point in the dataset.
+		-->
+		<Optimizer type="LocalPatternSearch">
+			<Option key="deviation" value="0.2"/>
+		</Optimizer>
+		
+		<!--
+			The optimizer will optimize the projected distance.
+		-->
+		<CandidateRanker type="ProjectedDistanceThreshold" scaling="none">
+			<!-- Determines the minimum size of a projected distance interval using formula: dMin = (2.0 / nSamples) * alpha -->
+			<Option key="alpha" value="0.5"/>
+		</CandidateRanker>
+		
+	</SampleSelector>
+	
+</SED>

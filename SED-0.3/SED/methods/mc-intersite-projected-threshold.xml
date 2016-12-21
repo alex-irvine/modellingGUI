@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<SED>
+	<!--
+		The initial design that is the best default choice for this method (the two corner points).
+	-->
+	<InitialDesign type="CrossCornerDesign">
+	</InitialDesign>
+	
+	
+	<!--
+		A Monte Carlo method that generates a large set of random local optima for the projected distance criterion,
+		and then selects the best candidates based on the intersite distance.
+	-->
+	<SampleSelector type="PipelineSampleSelector">
+	
+		<!--
+			This method generates the exact local optima of the projected distance criterion, and randomly selects a subset of these local optima
+			that matches the alpha requirement. Alpha defines how close to the optimal projected distance for the current number of points the
+			new candidate must be.
+		-->
+		<CandidateGenerator type="ProjectedThresholdRandomCandidateGenerator">
+			<Option key="candidatesPerSample" value="500"/>
+			<Option key="alpha" value="0.5"/>
+		</CandidateGenerator> 
+		
+		
+		<!-- Optimize the maximin/intersite distance criterion. -->
+		<CandidateRanker type="maximinDistance" scaling="none"/>
+		
+	</SampleSelector>
+</SED>

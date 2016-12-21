@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<SED>
+
+	<!--
+		The initial design that is the best default choice for this method (the two corner points).
+	-->
+	<InitialDesign type="CrossCornerDesign">
+	</InitialDesign>
+	
+	<!--
+		A method that first determines the best points in terms of projected distance, and then locally optimizes these points for the intersite distance,
+		this acquiring a good trade-off between both criteria.
+	-->
+	<SampleSelector type="OptimizeCriterion">
+		
+		<!-- This method generates all the local optima produced by the projected distance criteria that have a projected distance score large enough.
+			 How large is determined by the alpha parameter: larger alpha means larger restrictions on the local optima.
+		-->
+		<CandidateGenerator type="ProjectedDistanceGridCandidateGenerator">
+			<!-- Determines the minimum size of a projected distance interval using formula: dMin = (2.0 / nSamples) * alpha -->
+			<Option key="alpha" value="0.5"/>
+		</CandidateGenerator>
+	
+		<!-- Selects the nPop best local projected distance optima (based on the intersite distance criterium), and optimizes them within the bounds defined by alpha. -->
+		<Optimizer type="ProjectedDistanceGridOptimizer">
+			<!-- number of local optima to optimize -->
+			<Option key="nPop" value="50"/>
+			<!-- number of local pattern search iterations for each of the local optima -->
+			<Option key="maxIterations" value="100"/>
+		</Optimizer>
+		
+		<!-- The intersite distance criterion used by this method. -->
+		<CandidateRanker type="maximinDistance" scaling="none" sqrt="false" /> 
+		
+	</SampleSelector>
+	
+</SED>
