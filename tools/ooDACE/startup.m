@@ -46,7 +46,7 @@ oodaceRoot = p(1:end-7);
 % add matlab class paths
 addpath( genpath(oodaceRoot) );
 
-disp('* The ooDACE toolbox path has been setup...');
-disp('* To get started see http://sumowiki.intec.ugent.be/index.php/OoDACE:ooDACE_toolbox');
+% disp('* The ooDACE toolbox path has been setup...');
+% disp('* To get started see http://sumowiki.intec.ugent.be/index.php/OoDACE:ooDACE_toolbox');
 
 end

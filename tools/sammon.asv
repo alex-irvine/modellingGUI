@@ -183,7 +183,7 @@ function [y, E] = sammon(x, n, opts)
         % Evaluate termination criterion
         if abs((E - E_new) / E) < opts.TolFun
             if display
-                fprintf(1, 'Optimisation terminated - TolFun exceeded.\n');
+%                 fprintf(1, 'Optimisation terminated - TolFun exceeded.\n');
             end
             break;
         end
@@ -191,7 +191,7 @@ function [y, E] = sammon(x, n, opts)
         % Report progress
         E = E_new;
         if display > 1
-            fprintf(1, 'epoch = %d : E = %12.10f\n', i, E * scale);
+%             fprintf(1, 'epoch = %d : E = %12.10f\n', i, E * scale);
         end
     end
 
