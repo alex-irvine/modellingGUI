@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<SED>
+
+	<!--
+		The initial design that is the best default choice for this method (the two corner points).
+	-->
+	<InitialDesign type="CrossCornerDesign">
+	</InitialDesign>
+	
+	<!--
+		LOLA-Voronoi performs a trade-off between exploration (filling up the design space evenly) and focusing on areas which
+		are typically difficult to approximate with surrogate or approximation models, such as nonlinear regions and local optima.
+		To do this, LOLA uses LOcal Linear Approximations of the simulator to estimate the local nonlinearity, and select samples
+		in the most nonlinear regions.
+	-->
+	<SampleSelector type="LOLAVoronoiSampleSelector" requireOutputs="true">
+		<!-- The neighbourhood size. Should remain at 2 for optimal results. -->
+		<Option key="neighbourhoodSize" value="2"/>
+		<!-- Number of frequency values returned for each submitted sample. Only used with auto-sampled inputs. -->
+		<Option key="frequencies" value="11"/>
+	</SampleSelector>
+
+</SED>

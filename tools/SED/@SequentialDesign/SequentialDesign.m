@@ -217,13 +217,13 @@ classdef SequentialDesign
 			logger = this.logger;
 			
 			% transform back to model space
-			newPoints = this.transformToModelSpace(newPoints);
+% 			newPoints = this.transformToModelSpace(newPoints);
 			
 			% update the points
 			if size(newPoints,2) ~= this.config.input.getInputDimension()
 				logger.severe('newPoints does not have the same number of columns as there are inputs defined in the problem xml.');
 			end
-			this.samples((end-n+1):end,:) = newPoints;
+			this.samples = newPoints;
 			
 			% update the values
 			if exist('newValues', 'var')
@@ -233,7 +233,7 @@ classdef SequentialDesign
 				if size(newValues,2) ~= this.config.output.getOutputDimension()
 					logger.severe('newValues does not have the same number of columns as there are outputs defined in the problem xml.');
 				end
-				this.values((end-n+1):end,:) = newValues;
+				this.values = newValues;
 			end
 			
 			% update number of points for which an output was provided

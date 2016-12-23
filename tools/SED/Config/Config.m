@@ -43,11 +43,11 @@ classdef Config
 		end
 		
 		%> Create a new Config by defining the input- and output dimension.
-		function config = Config(inputDimension, outputDimension)
-			config.inputDimension = inputDimension;
-			config.outputDimension = outputDimension;
-			config.options = struct;
-		end
+% 		function config = Config(inputDimension, outputDimension)
+% 			config.inputDimension = inputDimension;
+% 			config.outputDimension = outputDimension;
+% 			config.options = struct;
+% 		end
 		
 		%> @brief set an option
 		%> @param name The name of the option
@@ -65,7 +65,7 @@ classdef Config
 				if exist('defaultValue', 'var')
 					value = defaultValue;
 				else
-					error(sprintf('Option %s does not exist in this object and no default value as given, aborting...', name);
+					error(sprintf('Option %s does not exist in this object and no default value as given, aborting...', name));
 				end
 			
 			% it does exist, return it
