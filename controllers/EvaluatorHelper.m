@@ -16,7 +16,15 @@ classdef EvaluatorHelper
                 samplesWrapper{i}.Value = func(samplesWrapper{i}.HyperParameters);
             end
         end
-    end
+        
+        function sample = EvaluateSample(sample,fname)
+            func = str2func(fname);
+            if ~isa(sample,'Sample')
+                error('sample must be of type Sample');
+            end
+            sample.Value = func(sample.HyperParameters);
+        end
+    end 
     
 end
 
