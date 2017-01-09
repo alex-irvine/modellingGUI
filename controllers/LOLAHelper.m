@@ -36,9 +36,9 @@ classdef LOLAHelper
             seq = seq.updatePoints(newPoints, out); 
         end
         
-        function [seq, point] = GenerateNewPoint(seq)
-            % generate one point
-            [seq, point] = seq.generatePoints(1);
+        function [seq, points] = GenerateNewPoint(seq)
+            % generate a new point
+            [seq, points] = seq.generatePoints(1);
         end
     end
     
